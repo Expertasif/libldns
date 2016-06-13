@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Doxygen is usefull for html documentation, but sucks 
+# Doxygen is usefull for html documentation, but sucks
 # in making manual pages. Still tool also parses the .h
 # files with the doxygen documentation and creates
 # the man page we want
@@ -41,7 +41,7 @@ The ldns team at NLnet Labs. Which consists out of
 Jelte Jansen and Miek Gieben.
 
 .SH REPORTING BUGS
-Please report bugs to ldns-team\@nlnetlabs.nl or in 
+Please report bugs to ldns-team\@nlnetlabs.nl or in
 our bugzilla at
 http://www.nlnetlabs.nl/bugs/index.html
 
@@ -139,7 +139,7 @@ while($i < $max) {
 	}
 
 	if ($state == 1) {
-		# inside doxygen 
+		# inside doxygen
 		$cur_line =~ s/\\/\\\\/g;
 		$cur_line =~ s/^[ \t]*\* ?//;
 		$description = $description . "\n" . $cur_line;
@@ -152,7 +152,7 @@ while($i < $max) {
 	} else {
 		#undef $const;
 	}
-	
+
 	if ($cur_line =~ /^INLINE/) {
 		$cur_line =~ s/^INLINE\s*//;
 		while ($cur_line !~ /{/) {
@@ -162,7 +162,7 @@ while($i < $max) {
 		}
 		$cur_line =~ s/{/;/;
 	}
-	
+
 	if ($cur_line =~ /^[^#*\/ ]([\w\*]+)[\t ]+(.*?)[({](.*)\s*/ and $state == 2) {
 		while ($cur_line !~ /\)\s*;/) {
 			$i++;
@@ -264,7 +264,7 @@ foreach (keys %manpages) {
 		print MAN  ".HP\n";
 		print MAN "\\fI", $_, "\\fR";
 		if ($api{$_} ne "struct") {
-			print MAN "()"; 
+			print MAN "()";
 		}
 #		print MAN ".br\n";
 		print MAN  $description{$_};
@@ -273,7 +273,7 @@ foreach (keys %manpages) {
 
 	print MAN $MAN_MIDDLE;
 
-	if (defined(@$also)) {
+	if (@$also) {
 		print MAN "\n.SH SEE ALSO\n\\fI";
 		print MAN join "\\fR, \\fI", @$also;
 		print MAN "\\fR.\nAnd ";
@@ -284,7 +284,7 @@ foreach (keys %manpages) {
 \\fBperldoc Net::DNS\\fR, \\fBRFC1034\\fR,
 \\fBRFC1035\\fR, \\fBRFC4033\\fR, \\fBRFC4034\\fR and \\fBRFC4035\\fR.\n";
 	}
-	
+
 	print MAN $MAN_FOOTER;
 
 	# create symlinks
